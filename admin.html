@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="XII PPLG Cash Management - Admin Login">
+    <title>XII PPLG Cash Management - Admin Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-bg"></div>
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon">🔐</div>
+                <h1>XII PPLG CASH MANAGEMENT</h1>
+                <p>Login Administrator</p>
+            </div>
+
+            <div class="login-error" id="login-error"></div>
+
+            <!-- Admin Login Form -->
+            <form id="form-admin" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" id="admin-username" placeholder="Masukkan username"
+                        autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="admin-password" placeholder="Masukkan password"
+                        autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-login-admin">
+                    Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+            const errorEl = document.getElementById('login-error');
+            errorEl.style.display = 'none';
+
+            const body = {
+                role: 'admin',
+                username: document.getElementById('admin-username').value,
+                password: document.getElementById('admin-password').value
+            };
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    errorEl.textContent = data.error || 'Login gagal';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+
+                // Save session
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('role', data.role);
+                localStorage.setItem('name', body.username);
+
+                window.location.href = 'index.html';
+            } catch (err) {
+                errorEl.textContent = 'Tidak dapat terhubung ke server';
+                errorEl.style.display = 'block';
+            }
+        }
+
+        // Auto-redirect if already logged in as admin
+        if (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

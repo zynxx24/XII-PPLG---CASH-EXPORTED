@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="XII PPLG Cash Management Dashboard">
+    <title>XII PPLG Cash Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="brand-icon">💰</div>
+                    <div class="brand-text">
+                        <h2>XII PPLG</h2>
+                        <span>Cash Management</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Menu Utama</div>
+                    <a class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                        <span class="nav-icon">📊</span> Dashboard
+                    </a>
+                    <a class="nav-item" data-page="payments" onclick="navigateTo('payments')">
+                        <span class="nav-icon">💳</span> Pembayaran Kas
+                    </a>
+                    <a class="nav-item" data-page="recap" onclick="navigateTo('recap')">
+                        <span class="nav-icon">📊</span> Rekap Tunggakan
+                    </a>
+                    <a class="nav-item" data-page="donations" onclick="navigateTo('donations')">
+                        <span class="nav-icon">🎁</span> Donatur
+                    </a>
+                    <a class="nav-item" data-page="fines" onclick="navigateTo('fines')">
+                        <span class="nav-icon">⚠️</span> Denda
+                        <span class="nav-badge" id="fine-badge" style="display:none">0</span>
+                    </a>
+                    <a class="nav-item" data-page="expenses" onclick="navigateTo('expenses')">
+                        <span class="nav-icon">💸</span> Pengeluaran
+                    </a>
+                    <a class="nav-item" data-page="levies" onclick="navigateTo('levies')">
+                        <span class="nav-icon">📋</span> Pungutan
+                    </a>
+                    <a class="nav-item" data-page="reports" onclick="navigateTo('reports')">
+                        <span class="nav-icon">📄</span> Laporan PDF
+                    </a>
+                </div>
+                <div class="nav-section" id="admin-nav" style="display:none">
+                    <div class="nav-section-title">Admin</div>
+                    <a class="nav-item" data-page="settings" onclick="navigateTo('settings')">
+                        <span class="nav-icon">⚙️</span> Pengaturan
+                    </a>
+                    <a class="nav-item" data-page="security" onclick="navigateTo('security')">
+                        <span class="nav-icon">🛡️</span> Security
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                    <div class="user-details">
+                        <div class="user-name" id="user-name">Admin</div>
+                        <div class="user-role" id="user-role">Administrator</div>
+                    </div>
+                    <button class="btn-logout" onclick="logout()" title="Logout">🚪</button>
+                </div>
+        </aside>
+
+        <!-- Sidebar Overlay for Mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+                    <div>
+                        <h1 id="page-title">Dashboard</h1>
+                        <div class="page-subtitle" id="page-subtitle">Ringkasan pembukuan kas kelas</div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-search">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" placeholder="Cari..." id="global-search" oninput="handleSearch(this.value)">
+                    </div>
+                </div>
+            </div>
+            <div class="content-area" id="content-area">
+                <div class="loading">Memuat data...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer" id="modal-footer"></div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/static_data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

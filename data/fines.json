@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "member_id": 10,
+        "reason": "Denda Kas Juli 2026",
+        "amount": 5000,
+        "date": "2026-09-23",
+        "paid": false,
+        "month": "2026-07",
+        "auto_generated": true
+    },
+    {
+        "id": 2,
+        "member_id": 13,
+        "reason": "Denda Kas Juli 2026",
+        "amount": 5000,
+        "date": "2026-09-23",
+        "paid": false,
+        "month": "2026-07",
+        "auto_generated": true
+    },
+    {
+        "id": 4,
+        "member_id": 30,
+        "reason": "Denda Kas Juli 2026",
+        "amount": 5000,
+        "date": "2026-09-23",
+        "paid": false,
+        "month": "2026-07",
+        "auto_generated": true
+    },
+    {
+        "member_id": 18,
+        "reason": "Denda Kas Juli 2026",
+        "amount": 5000,
+        "date": "2026-09-23",
+        "paid": true,
+        "month": "2026-07",
+        "auto_generated": true,
+        "id": 5
+    }
+]

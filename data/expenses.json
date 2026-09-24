@@ -1,0 +1,128 @@
+[
+	{
+		"description": "Ogoh - Ogoh",
+		"amount": 300000,
+		"date": "2026-02-01",
+		"id": 1
+	},
+	{
+		"description": "Buku Kas",
+		"amount": 10500,
+		"date": "2026-02-01",
+		"id": 2
+	},
+	{
+		"description": "Uang Keluar",
+		"amount": 50000,
+		"date": "2026-02-01",
+		"id": 5
+	},
+	{
+		"description": "Ogoh - Ogoh",
+		"amount": 200000,
+		"date": "2026-02-01",
+		"id": 6
+	},
+	{
+		"description": "Ogoh - Ogoh",
+		"amount": 100000,
+		"date": "2026-02-01",
+		"id": 7
+	},
+	{
+		"description": "Kanvas",
+		"amount": 67000,
+		"date": "2026-02-01",
+		"id": 8
+	},
+	{
+		"description": "Literasi Pagi",
+		"amount": 30000,
+		"date": "2026-03-01",
+		"id": 9
+	},
+	{
+		"description": "Ogoh - Ogoh",
+		"amount": 140000,
+		"date": "2026-03-01",
+		"id": 10
+	},
+	{
+		"description": "Property Drama",
+		"amount": 300000,
+		"date": "2026-03-01",
+		"id": 11
+	},
+	{
+		"description": "Saraswati",
+		"amount": 440000,
+		"date": "2026-04-01",
+		"id": 12
+	},
+	{
+		"description": "Latihan Masak",
+		"amount": 93000,
+		"date": "2026-04-01",
+		"id": 13
+	},
+	{
+		"description": "Tirai & Jahit",
+		"amount": 255000,
+		"date": "2026-04-01",
+		"id": 14
+	},
+	{
+		"description": "Property Drama",
+		"amount": 200000,
+		"date": "2026-05-01",
+		"id": 15
+	},
+	{
+		"description": "Jahit Bendera",
+		"amount": 35000,
+		"date": "2026-05-01",
+		"id": 16
+	},
+	{
+		"description": "Tugas Agama",
+		"amount": 62000,
+		"date": "2026-02-01",
+		"id": 17
+	},
+	{
+		"description": "Pulpen kas",
+		"amount": 4000,
+		"date": "2026-02-01",
+		"id": 18
+	},
+	{
+		"description": "Dompet kas",
+		"amount": 6500,
+		"date": "2026-02-01",
+		"id": 19
+	},
+	{
+		"description": "Jagung, Sayur, Kacang",
+		"amount": 40000,
+		"date": "2026-05-01",
+		"id": 20
+	},
+	{
+		"description": "SNOWMAN BOARD MARKER BLACK",
+		"amount": 9000,
+		"date": "2026-07-26",
+		"id": 21
+	},
+	{
+		"description": "MAP PLASTIK BIG",
+		"amount": 17000,
+		"date": "2026-07-26",
+		"id": 22
+	},
+	{
+		"description": "Kamis Literasi",
+		"amount": 36000,
+		"date": "2026-09-10",
+		"id": 23
+	}
+]
