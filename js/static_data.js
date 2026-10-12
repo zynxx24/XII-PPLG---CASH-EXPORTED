@@ -683,7 +683,17 @@ window._embeddedData = {
         "2026-08-03": true,
         "2026-08-10": true,
         "2026-08-17": true,
-        "2026-08-24": true
+        "2026-08-24": true,
+        "2026-08-31": true,
+        "2026-09-07": true,
+        "2026-09-14": true,
+        "2026-09-21": true,
+        "2026-09-28": true,
+        "2026-10-05": true,
+        "2026-10-12": true,
+        "2026-10-19": true,
+        "2026-10-26": true,
+        "2026-11-02": true
       },
       "18": {
         "2026-01-05": true,
@@ -1187,36 +1197,6 @@ window._embeddedData = {
   ],
   "fines": [
     {
-      "id": 1,
-      "member_id": 10,
-      "reason": "Denda Kas Juli 2026",
-      "amount": 5000,
-      "date": "2026-09-23",
-      "paid": false,
-      "month": "2026-07",
-      "auto_generated": true
-    },
-    {
-      "id": 2,
-      "member_id": 13,
-      "reason": "Denda Kas Juli 2026",
-      "amount": 5000,
-      "date": "2026-09-23",
-      "paid": false,
-      "month": "2026-07",
-      "auto_generated": true
-    },
-    {
-      "id": 4,
-      "member_id": 30,
-      "reason": "Denda Kas Juli 2026",
-      "amount": 5000,
-      "date": "2026-09-23",
-      "paid": false,
-      "month": "2026-07",
-      "auto_generated": true
-    },
-    {
       "member_id": 18,
       "reason": "Denda Kas Juli 2026",
       "amount": 5000,
@@ -1225,6 +1205,226 @@ window._embeddedData = {
       "month": "2026-07",
       "auto_generated": true,
       "id": 5
+    },
+    {
+      "member_id": 10,
+      "reason": "Denda Kas Juli 2026",
+      "amount": 10000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-07",
+      "auto_generated": true,
+      "id": 6
+    },
+    {
+      "member_id": 13,
+      "reason": "Denda Kas Juli 2026",
+      "amount": 10000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-07",
+      "auto_generated": true,
+      "id": 7
+    },
+    {
+      "member_id": 30,
+      "reason": "Denda Kas Juli 2026",
+      "amount": 10000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-07",
+      "auto_generated": true,
+      "id": 8
+    },
+    {
+      "member_id": 7,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 9
+    },
+    {
+      "member_id": 8,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 10
+    },
+    {
+      "member_id": 9,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 11
+    },
+    {
+      "member_id": 10,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 12
+    },
+    {
+      "member_id": 11,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 13
+    },
+    {
+      "member_id": 12,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 14
+    },
+    {
+      "member_id": 13,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 15
+    },
+    {
+      "member_id": 14,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 16
+    },
+    {
+      "member_id": 15,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 17
+    },
+    {
+      "member_id": 18,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 18
+    },
+    {
+      "member_id": 19,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 19
+    },
+    {
+      "member_id": 20,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 20
+    },
+    {
+      "member_id": 22,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 21
+    },
+    {
+      "member_id": 23,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 22
+    },
+    {
+      "member_id": 28,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 23
+    },
+    {
+      "member_id": 30,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 24
+    },
+    {
+      "member_id": 31,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 25
+    },
+    {
+      "member_id": 32,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 26
+    },
+    {
+      "member_id": 33,
+      "reason": "Denda Kas Agustus 2026",
+      "amount": 5000,
+      "date": "2026-10-13",
+      "paid": false,
+      "month": "2026-08",
+      "auto_generated": true,
+      "id": 27
     }
   ],
   "expenses": [
