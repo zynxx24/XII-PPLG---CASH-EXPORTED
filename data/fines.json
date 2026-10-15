@@ -170,16 +170,6 @@
         "id": 21
     },
     {
-        "member_id": 23,
-        "reason": "Denda Kas Agustus 2026",
-        "amount": 5000,
-        "date": "2026-10-13",
-        "paid": false,
-        "month": "2026-08",
-        "auto_generated": true,
-        "id": 22
-    },
-    {
         "member_id": 28,
         "reason": "Denda Kas Agustus 2026",
         "amount": 5000,

@@ -2,7 +2,7 @@ window._embeddedData = {
   "config": {
     "kas_amount": 5000,
     "previous_balance": 0,
-    "real_balance": 2278000,
+    "real_balance": 2373000,
     "class_name": "XII PPLG",
     "year": "2026/2027"
   },
@@ -860,7 +860,11 @@ window._embeddedData = {
         "2026-07-13": true,
         "2026-07-20": true,
         "2026-07-27": true,
-        "2026-08-03": true
+        "2026-08-03": true,
+        "2026-08-10": true,
+        "2026-08-17": true,
+        "2026-08-24": true,
+        "2026-08-31": true
       },
       "24": {
         "2026-01-05": true,
@@ -894,7 +898,12 @@ window._embeddedData = {
         "2026-08-31": true,
         "2026-09-07": true,
         "2026-09-14": true,
-        "2026-09-21": true
+        "2026-09-21": true,
+        "2026-09-28": true,
+        "2026-10-05": true,
+        "2026-10-12": true,
+        "2026-10-19": true,
+        "2026-10-26": true
       },
       "25": {
         "2026-01-05": true,
@@ -1367,16 +1376,6 @@ window._embeddedData = {
       "id": 21
     },
     {
-      "member_id": 23,
-      "reason": "Denda Kas Agustus 2026",
-      "amount": 5000,
-      "date": "2026-10-13",
-      "paid": false,
-      "month": "2026-08",
-      "auto_generated": true,
-      "id": 22
-    },
-    {
       "member_id": 28,
       "reason": "Denda Kas Agustus 2026",
       "amount": 5000,
@@ -1580,9 +1579,9 @@ window._embeddedData = {
       "reason": "Kebutuhan Mendesak",
       "doc_type": "ktp",
       "date": "2026-09-30",
-      "status": "approved",
       "deadline": "2026-10-16",
-      "admin_note": "Cefat yaa"
+      "status": "returned",
+      "admin_note": "Lunas / Dikembalikan"
     }
   ]
 };
