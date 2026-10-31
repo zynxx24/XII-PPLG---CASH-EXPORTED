@@ -3,41 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="XII PPLG Cash Management - Admin Login">
-    <title>XII PPLG Cash Management - Admin Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kas XII PPLG - Login Admin">
+    <title>Login Admin · Kas XII PPLG</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="login-bg"></div>
-        <div class="login-card">
-            <div class="login-logo">
-                <div class="logo-icon">🔐</div>
-                <h1>XII PPLG CASH MANAGEMENT</h1>
-                <p>Login Administrator</p>
-            </div>
+    <div class="login">
+        <form class="login-card" id="form-admin" onsubmit="handleLogin(event)">
+            <img src="asset/webp/PPLG-LOGO.webp" alt="">
+            <h1>Kas XII PPLG</h1>
+            <p>Masuk sebagai administrator</p>
 
             <div class="login-error" id="login-error"></div>
 
-            <!-- Admin Login Form -->
-            <form id="form-admin" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-input" id="admin-username" placeholder="Masukkan username"
-                        autocomplete="username" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="admin-password" placeholder="Masukkan password"
-                        autocomplete="current-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary" id="btn-login-admin">
-                    Masuk
-                </button>
-            </form>
-        </div>
+            <div class="field">
+                <label for="admin-username">Username</label>
+                <input type="text" class="input" id="admin-username" autocomplete="username" required>
+            </div>
+            <div class="field">
+                <label for="admin-password">Password</label>
+                <input type="password" class="input" id="admin-password" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Masuk</button>
+            <a class="login-back" href="index.html">← Kembali ke dashboard</a>
+        </form>
     </div>
 
     <script>
@@ -66,7 +57,6 @@
                     return;
                 }
 
-                // Save session
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('role', data.role);
                 localStorage.setItem('name', body.username);
@@ -78,7 +68,6 @@
             }
         }
 
-        // Auto-redirect if already logged in as admin
         if (localStorage.getItem('token') && localStorage.getItem('role') === 'admin') {
             window.location.href = 'index.html';
         }

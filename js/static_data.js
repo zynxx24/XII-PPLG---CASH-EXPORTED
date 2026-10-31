@@ -2,7 +2,7 @@ window._embeddedData = {
   "config": {
     "kas_amount": 5000,
     "previous_balance": 0,
-    "real_balance": 2373000,
+    "real_balance": 1353000,
     "class_name": "XII PPLG",
     "year": "2026/2027"
   },
@@ -178,12 +178,7 @@ window._embeddedData = {
       "2026-10-05",
       "2026-10-12",
       "2026-10-19",
-      "2026-10-26",
-      "2026-11-02",
-      "2026-11-09",
-      "2026-11-16",
-      "2026-11-23",
-      "2026-11-30"
+      "2026-10-26"
     ],
     "records": {
       "1": {
@@ -692,8 +687,7 @@ window._embeddedData = {
         "2026-10-05": true,
         "2026-10-12": true,
         "2026-10-19": true,
-        "2026-10-26": true,
-        "2026-11-02": true
+        "2026-10-26": true
       },
       "18": {
         "2026-01-05": true,
@@ -1070,11 +1064,7 @@ window._embeddedData = {
         "2026-10-05": true,
         "2026-10-12": true,
         "2026-10-19": true,
-        "2026-10-26": true,
-        "2026-11-02": true,
-        "2026-11-09": true,
-        "2026-11-16": true,
-        "2026-11-23": true
+        "2026-10-26": true
       },
       "30": {
         "2026-01-05": true,
@@ -1558,30 +1548,12 @@ window._embeddedData = {
       "amount": 47000,
       "date": "2026-09-30",
       "id": 28
-    }
-  ],
-  "levies": [
+    },
     {
-      "id": 1,
-      "title": "Saraswati",
-      "amount": 5000,
-      "start_date": "2026-10-01",
-      "deadline": "2026-10-27",
-      "paid_members": []
-    }
-  ],
-  "loans": [
-    {
-      "id": 1,
-      "member_id": 5,
-      "member_name": "GALISTAN RAMADHAN KURNIA TAUNAES",
-      "amount": 200000,
-      "reason": "Kebutuhan Mendesak",
-      "doc_type": "ktp",
-      "date": "2026-09-30",
-      "deadline": "2026-10-16",
-      "status": "returned",
-      "admin_note": "Lunas / Dikembalikan"
+      "description": "Saraswati",
+      "amount": 995000,
+      "date": "2026-10-30",
+      "id": 29
     }
   ]
 };

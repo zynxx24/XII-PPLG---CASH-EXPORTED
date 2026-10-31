@@ -60,8 +60,6 @@ const API = {
             '/api/donations': 'donations',
             '/api/fines': 'fines',
             '/api/expenses': 'expenses',
-            '/api/levies': 'levies',
-            '/api/loans': 'loans',
             '/api/security': 'security'
         };
 
@@ -181,14 +179,5 @@ const API = {
     getConfig() { return this.get('/api/config'); },
     saveConfig(data) { return this.post('/api/config', data); },
     getSecurity() { return this.get('/api/security'); },
-    getLevies() { return this.get('/api/levies'); },
-    addLevy(data) { return this.post('/api/levies', data); },
-    updateLevy(id, data) { return this.request('PUT', `/api/levies/${id}`, data); },
-    deleteLevy(id) { return this.del(`/api/levies/${id}`); },
-    toggleLevyPayment(levyId, memberId) { return this.post(`/api/levies/${levyId}/pay`, { member_id: memberId }); },
-    getLoans() { return this.get('/api/loans'); },
-    addLoan(data) { return this.post('/api/loans', data); },
-    updateLoan(id, data) { return this.request('PUT', `/api/loans/${id}`, data); },
-    deleteLoan(id) { return this.del(`/api/loans/${id}`); },
     logout() { return this.post('/api/logout'); }
 };
