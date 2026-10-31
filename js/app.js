@@ -7,7 +7,6 @@ const NAV = [
     ['dashboard', 'Dashboard'],
     ['payments', 'Kas'],
     ['recap', 'Tunggakan'],
-    ['fines', 'Denda'],
     ['donations', 'Donatur'],
     ['expenses', 'Pengeluaran'],
     ['reports', 'Laporan'],
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!API.getToken()) localStorage.setItem('role', 'user');
     buildNav();
     navigateTo(location.hash.slice(1) || 'dashboard');
-    API.getFines().then(f => updateNavBadge('fines', f.filter(x => !x.paid).length)).catch(() => { });
 });
 
 window.addEventListener('hashchange', () => {

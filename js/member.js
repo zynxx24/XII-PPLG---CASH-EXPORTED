@@ -3,7 +3,7 @@
  */
 const Member = {
     async open(id) {
-        const [payments, members, fines, config] = await Promise.all([API.getPayments(), API.getMembers(), API.getFines(), API.getConfig()]);
+        const [payments, members, config] = await Promise.all([API.getPayments(), API.getMembers(), API.getConfig()]);
         State.members = members;
         const m = members.find(x => x.id === id);
         if (!m) return;
@@ -13,9 +13,7 @@ const Member = {
         const dates = (payments.dates || []).filter(d => d <= serverDate());
         const paid = dates.filter(d => isPaid(records, id, d));
         const missed = dates.filter(d => !isPaid(records, id, d) && !isExempt(id, d));
-        const myFines = fines.filter(f => f.member_id === id);
-        const unpaidFines = myFines.filter(f => !f.paid);
-        const owed = missed.length * kas + sum(unpaidFines);
+        const owed = missed.length * kas;
 
         // Kalender titik per bulan
         const months = {};
@@ -40,15 +38,15 @@ const Member = {
             <div class="mini-stats">
                 <div><b class="ok">${paid.length}</b><span>minggu lunas</span></div>
                 <div><b class="${missed.length ? 'bad' : ''}">${missed.length}</b><span>minggu belum</span></div>
-                <div><b class="${unpaidFines.length ? 'warn' : ''}">${rp(sum(unpaidFines))}</b><span>denda aktif</span></div>
+                <div><b class="${owed ? 'bad' : ''}">${rp(owed)}</b><span>tunggakan</span></div>
             </div>
             ${missed.length ? `<div class="field"><label>Tanggal belum bayar</label><div class="chips">${missed.map(d => `<span class="chip bad">${fmtDateShort(d)} ${d.slice(2, 4)}</span>`).join('')}</div></div>` : ''}
             <div class="field"><label>Riwayat <span class="legend"><i class="ok"></i>lunas <i class="no"></i>belum <i class="ex"></i>dispensasi</span></label>
                 <div class="calendar">${calendar || '<span class="muted">Belum ada data</span>'}</div>
             </div>
-            ${myFines.length ? `<div class="field"><label>Denda</label>${myFines.map(f => `<div class="mini-row"><span>${esc(f.reason)}</span><span class="num ${f.paid ? 'ok' : 'bad'}">${rp(f.amount)} · ${f.paid ? 'lunas' : 'belum'}</span></div>`).join('')}</div>` : ''}`;
+            `;
 
-        this.msg = `Halo ${m.name}, kas kelas XII PPLG kamu masih kurang ${rp(owed)} (${missed.length} minggu${unpaidFines.length ? ' + denda' : ''}). Mohon segera dilunasi ya 🙏`;
+        this.msg = `Halo ${m.name}, kas kelas XII PPLG kamu masih kurang ${rp(owed)} (${missed.length} minggu). Mohon segera dilunasi ya 🙏`;
         const footer = owed ? `<button class="btn" onclick="copyText(Member.msg, 'Pesan disalin')">Salin pesan WA</button>` : '';
         openModal('Status kas siswa', body, footer + `<button class="btn btn-primary" onclick="closeModal()">Tutup</button>`);
     }

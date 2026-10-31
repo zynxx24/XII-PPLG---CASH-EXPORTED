@@ -1,10 +1,9 @@
 /* ======= Rekap Tunggakan ======= */
 Pages.recap = {
     title: 'Rekap Tunggakan',
-    subtitle: 'Siswa yang belum lunas per bulan · denda Rp5.000/bulan mulai bulan ke-2',
+    subtitle: 'Siswa yang belum lunas kas per bulan',
 
     async render(el) {
-        await syncAutoFines();
         const [payments, members, config] = await Promise.all([API.getPayments(), API.getMembers(), API.getConfig()]);
         State.members = members;
 
@@ -14,14 +13,14 @@ Pages.recap = {
             return;
         }
 
-        const debt = sum(months, m => m.debt), fine = sum(months, m => m.fine);
+        const debt = sum(months, m => m.debt);
+        const owing = new Set(months.flatMap(m => m.unpaid.map(u => u.id))).size;
         const clean = months.filter(m => !m.unpaid.length).length;
 
         el.innerHTML = `<div class="stack">
             <div class="stats">
                 ${ui.stat('Tunggakan', rp(debt), 'kas belum dibayar', 'tone-warn', '📉')}
-                ${ui.stat('Denda', rp(fine), 'Rp5.000/bulan', 'tone-bad', '⏰')}
-                ${ui.stat('Total harus dibayar', rp(debt + fine), 'tunggakan + denda', 'tone-purple', '💰')}
+                ${ui.stat('Siswa menunggak', `${owing}/${members.length}`, 'punya minggu belum bayar', 'tone-bad', '👥')}
                 ${ui.stat('Bulan lunas', `${clean}/${months.length}`, 'semua siswa bayar', 'tone-ok', '✅')}
             </div>
             <div>${months.map((m, i) => this.month(m, i === 0)).join('')}</div>
@@ -38,10 +37,10 @@ Pages.recap = {
         (this.msgs = this.msgs || {})[m.ym] = reminderText(`Tunggakan kas ${fmtMonth(m.ym)}`, m.unpaid.map(u => ({ name: u.name, amount: u.total })));
         const body = ok
             ? ui.empty('✅', 'Semua siswa sudah bayar bulan ini')
-            : `<div class="month-bar"><span class="muted">Tunggakan ${rp(m.debt)} + denda ${rp(m.fine)}</span><button class="btn btn-sm" onclick="copyText(Pages.recap.msgs['${m.ym}'], 'Daftar disalin — tempel di grup WA')">📋 Salin WA</button></div>` + ui.list(m.unpaid.map(u => ui.row({
+            : `<div class="month-bar"><span class="muted">Total tunggakan ${rp(m.debt)}</span><button class="btn btn-sm" onclick="copyText(Pages.recap.msgs['${m.ym}'], 'Daftar disalin — tempel di grup WA')">📋 Salin WA</button></div>` + ui.list(m.unpaid.map(u => ui.row({
                 lead: avatar(u.name, u.id),
                 title: nameLink(u.id, u.name),
-                meta: `${u.missed.length} minggu (${u.missed.map(fmtDateShort).join(', ')}) · tunggakan ${rp(u.debt)}${u.fine ? ` + denda ${rp(u.fine)}` : ''}`,
+                meta: `${u.missed.length} minggu (${u.missed.map(fmtDateShort).join(', ')})`,
                 amount: rp(u.total),
                 amountClass: 'bad'
             })), 10);

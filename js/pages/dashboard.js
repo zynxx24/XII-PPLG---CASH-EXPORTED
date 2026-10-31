@@ -4,9 +4,9 @@ Pages.dashboard = {
     subtitle: 'Ringkasan kas kelas XII PPLG',
 
     async render(el) {
-        const [data, members, payments, donations, fines, expenses, config] = await Promise.all([
+        const [data, members, payments, donations, expenses, config] = await Promise.all([
             API.getDashboard(), API.getMembers(), API.getPayments(),
-            API.getDonations(), API.getFines(), API.getExpenses(), API.getConfig()
+            API.getDonations(), API.getExpenses(), API.getConfig()
         ]);
         if (data.server_date) State.serverDate = data.server_date;
         State.members = members;
@@ -14,9 +14,11 @@ Pages.dashboard = {
         const kas = data.kas_amount || 5000;
         const real = config.real_balance || 0;
         const diff = real - data.total_balance;
-        const ledger = buildLedger({ payments, members, donations, fines, expenses, kasAmount: kas });
+        const ledger = buildLedger({ payments, members, donations, expenses, kasAmount: kas });
         this.series = balanceSeries(ledger, data.previous_balance || 0);
 
+        const recap = buildRecap(payments, members, kas);
+        const totalDebt = sum(recap, m => m.debt);
         const month = serverDate().slice(0, 7);
         const thisMonth = ledger.filter(t => t.date.startsWith(month));
         const inMonth = sum(thisMonth.filter(t => t.amount > 0));
@@ -41,7 +43,7 @@ Pages.dashboard = {
                 ${ui.stat('Pemasukan kas', rp(data.total_kas_income), `${data.total_payments}× bayar @ ${rp(kas)}`, 'tone-ok', '💳')}
                 ${ui.stat('Donasi', rp(data.total_donation_amount), `${data.total_donation_count} donatur`, 'tone-purple', '🎁')}
                 ${ui.stat('Pengeluaran', rp(data.total_expense_amount), `${data.total_expense_count} nota`, 'tone-warn', '🧾')}
-                ${ui.stat('Denda belum bayar', rp(data.unpaid_fine_amount), `${fines.filter(f => !f.paid).length} denda aktif`, 'tone-bad', '⏰')}
+                ${ui.stat('Tunggakan kas', rp(totalDebt), 'bulan-bulan sebelumnya', 'tone-bad', '📉')}
             </div>
 
             <div class="cols">
@@ -51,7 +53,7 @@ Pages.dashboard = {
 
             <div class="cols cols-even">
                 ${this.recentPanel(ledger)}
-                ${this.debtorsPanel(payments, members, kas)}
+                ${this.debtorsPanel(recap)}
             </div>
         </div>`;
     },
@@ -66,7 +68,7 @@ Pages.dashboard = {
     lookup(members) {
         return `<div class="lookup">
             <div class="lookup-title">🔎 Cek kas kamu</div>
-            <p>Ketik nama untuk melihat status pembayaran, tunggakan, dan denda.</p>
+            <p>Ketik nama untuk melihat status pembayaran dan tunggakan.</p>
             <input class="input" list="member-list" id="lookup-input" placeholder="Ketik nama…" oninput="Pages.dashboard.pick(this.value)">
             <datalist id="member-list">${members.map(m => `<option value="${esc(m.name)}">`).join('')}</datalist>
         </div>`;
@@ -104,7 +106,7 @@ Pages.dashboard = {
     },
 
     recentPanel(ledger) {
-        const icons = { kas: '💳', donasi: '🎁', denda: '⏰', keluar: '🧾' };
+        const icons = { kas: '💳', donasi: '🎁', keluar: '🧾' };
         const rows = ledger.slice().reverse().slice(0, 6).map(t => `<li class="row">
             <span class="tx-icon ${t.amount < 0 ? 'out' : 'in'}">${icons[t.kind]}</span>
             <div class="row-main"><div class="row-title">${esc(t.label)}</div><div class="row-meta">${fmtDate(t.date)}</div></div>
@@ -114,15 +116,15 @@ Pages.dashboard = {
     },
 
     /* Siswa dengan tunggakan terbesar (bulan-bulan yang sudah lewat) */
-    debtorsPanel(payments, members, kas) {
+    debtorsPanel(recap) {
         const totals = {};
-        buildRecap(payments, members, kas).forEach(mo => mo.unpaid.forEach(u => {
+        recap.forEach(mo => mo.unpaid.forEach(u => {
             const t = totals[u.id] = totals[u.id] || { id: u.id, name: u.name, weeks: 0, total: 0 };
             t.weeks += u.missed.length;
             t.total += u.total;
         }));
         const top = Object.values(totals).sort((a, b) => b.total - a.total);
-        this.debtReminder = reminderText('Tunggakan kas XII PPLG (termasuk denda)', top.map(t => ({ name: t.name, amount: t.total })));
+        this.debtReminder = reminderText('Tunggakan kas XII PPLG', top.map(t => ({ name: t.name, amount: t.total })));
 
         const max = top.length ? top[0].total : 1;
         const rows = top.slice(0, 6).map(t => `<li class="row clickable" onclick="Member.open(${t.id})">

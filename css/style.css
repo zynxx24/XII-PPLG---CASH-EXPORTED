@@ -796,6 +796,25 @@ i.ex { background: var(--purple); }
 
 .month-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 12px; }
 
+/* ======= Report extras ======= */
+.report-bar { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.report .r-head { display: flex; justify-content: space-between; margin: -16px 0 22px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; font-size: 9px; color: #94a3b8; text-transform: uppercase; letter-spacing: .5px; }
+.report .r-total td { background: #f0f5ff; font-weight: 800; color: #1e40af; }
+.report .r-progress { height: 10px; border-radius: 999px; background: #fee2e2; overflow: hidden; }
+.report .r-progress span { display: block; height: 100%; background: #10b981; }
+.report .r-name { white-space: nowrap; max-width: 210px; overflow: hidden; text-overflow: ellipsis; }
+.report .r-matrix { font-size: 9px; }
+.report .r-matrix th, .report .r-matrix td { padding: 4px 5px; }
+.report .c-ok { background: #ecfdf5; color: #047857; font-weight: 700; }
+.report .c-part { background: #fffbeb; color: #b45309; font-weight: 700; }
+.report .c-no { background: #fef2f2; color: #dc2626; font-weight: 700; }
+.report .c-ex { background: #f5f3ff; color: #7c3aed; font-weight: 700; }
+.report .r-compact td, .report .r-compact th { padding: 4px 9px; }
+.report .r-legend { margin-top: 10px; color: #64748b; font-size: 10px; }
+.report .r-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 4px 0 10px; vertical-align: middle; }
+.report td.right, .report th.right { text-align: right; }
+.report td.center, .report th.center { text-align: center; }
+
 /* ======= Responsive ======= */
 @media (max-width: 860px) {
     .cols, .cols-even, .hero-grid { grid-template-columns: 1fr; }
@@ -820,7 +839,11 @@ i.ex { background: var(--purple); }
 
 /* ======= Print (PDF report) ======= */
 @media print {
-    @page { size: A4; margin: 0; }
+    @page { size: A4; margin: 12mm 0; }
+    .report section { padding: 0 16mm; }
+    .report .cover { min-height: 268mm; }
+    .report .r-head { margin-top: 0; }
+    .report tr { break-inside: avoid; }
     body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .topbar, .page-head, .no-print, .toast-container, .modal-overlay { display: none !important; }
     main.wrap { max-width: none; padding: 0; }

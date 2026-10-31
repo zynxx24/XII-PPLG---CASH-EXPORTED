@@ -58,7 +58,6 @@ const API = {
             '/api/members': 'members',
             '/api/payments': 'payments',
             '/api/donations': 'donations',
-            '/api/fines': 'fines',
             '/api/expenses': 'expenses',
             '/api/security': 'security'
         };
@@ -85,11 +84,10 @@ const API = {
     },
 
     async calculateStaticDashboard() {
-        const [config, payments, donations, fines, expenses, members] = await Promise.all([
+        const [config, payments, donations, expenses, members] = await Promise.all([
             this.getStaticData('/api/config'),
             this.getStaticData('/api/payments'),
             this.getStaticData('/api/donations'),
-            this.getStaticData('/api/fines'),
             this.getStaticData('/api/expenses'),
             this.getStaticData('/api/members')
         ]);
@@ -113,18 +111,10 @@ const API = {
         const total_donation_amount = (donations || []).reduce((sum, d) => sum + (d.amount || 0), 0);
         const total_donation_count = (donations || []).length;
 
-        let total_fine_amount = 0;
-        let unpaid_fine_amount = 0;
-        (fines || []).forEach(f => {
-            total_fine_amount += (f.amount || 0);
-            if (!f.paid) unpaid_fine_amount += (f.amount || 0);
-        });
-
-        const paid_fine_amount = total_fine_amount - unpaid_fine_amount;
         const total_expense_amount = (expenses || []).reduce((sum, e) => sum + (e.amount || 0), 0);
         const total_expense_count = (expenses || []).length;
 
-        const total_balance = previous_balance + total_kas_income + total_donation_amount + paid_fine_amount - total_expense_amount;
+        const total_balance = previous_balance + total_kas_income + total_donation_amount - total_expense_amount;
         const server_date = new Date().toISOString().split('T')[0];
 
         let latest_paid = 0;
@@ -147,10 +137,6 @@ const API = {
             total_members,
             total_donation_amount,
             total_donation_count,
-            total_fine_amount,
-            total_fine_count: (fines || []).length,
-            unpaid_fine_amount,
-            paid_fine_amount,
             total_expense_amount,
             total_expense_count,
             latest_paid,
@@ -170,9 +156,6 @@ const API = {
     getDonations() { return this.get('/api/donations'); },
     addDonation(data) { return this.post('/api/donations', data); },
     deleteDonation(id) { return this.del(`/api/donations/${id}`); },
-    getFines() { return this.get('/api/fines'); },
-    addFine(data) { return this.post('/api/fines', data); },
-    deleteFine(id) { return this.del(`/api/fines/${id}`); },
     getExpenses() { return this.get('/api/expenses'); },
     addExpense(data) { return this.post('/api/expenses', data); },
     deleteExpense(id) { return this.del(`/api/expenses/${id}`); },

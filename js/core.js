@@ -6,7 +6,6 @@
 const Pages = {};               // diisi oleh js/pages/*.js
 const State = { members: [], payments: null, serverDate: null };
 
-const FINE_PER_MONTH = 5000;
 const MONTHS = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
 
@@ -72,15 +71,6 @@ function groupByMonth(dates, includeCurrent = false) {
     return groups;
 }
 
-function monthsLate(ym) {
-    const [y, m] = ym.split('-').map(Number);
-    const [ny, nm] = serverDate().split('-').map(Number);
-    return (ny - y) * 12 + (nm - m);
-}
-
-/* Denda: aman di bulan ke-1, Rp5.000/bulan mulai bulan ke-2 */
-const fineFor = ym => (monthsLate(ym) >= 2 ? (monthsLate(ym) - 1) * FINE_PER_MONTH : 0);
-
 /* Rekap tunggakan per bulan (bulan lalu saja), terbaru dulu */
 function buildRecap(payments, members, kasAmount) {
     const records = payments.records || {};
@@ -90,20 +80,19 @@ function buildRecap(payments, members, kasAmount) {
         const unpaid = members.map(m => {
             const missed = dates.filter(d => !isPaid(records, m.id, d) && !isExempt(m.id, d));
             if (!missed.length) return null;
-            const debt = missed.length * kasAmount, fine = fineFor(ym);
-            return { id: m.id, name: m.name, missed, debt, fine, total: debt + fine };
+            const debt = missed.length * kasAmount;
+            return { id: m.id, name: m.name, missed, debt, total: debt };
         }).filter(Boolean).sort((a, b) => b.missed.length - a.missed.length);
         return {
             ym, dates, unpaid,
             debt: sum(unpaid, u => u.debt),
-            fine: sum(unpaid, u => u.fine),
-            total: sum(unpaid, u => u.total)
+            total: sum(unpaid, u => u.debt)
         };
     });
 }
 
 /* Semua transaksi (pemasukan +, pengeluaran −) untuk grafik saldo */
-function buildLedger({ payments, members, donations, fines, expenses, kasAmount }) {
+function buildLedger({ payments, members, donations, expenses, kasAmount }) {
     const tx = [];
     const records = payments.records || {};
     (payments.dates || []).forEach(d => {
@@ -111,7 +100,6 @@ function buildLedger({ payments, members, donations, fines, expenses, kasAmount 
         if (n) tx.push({ date: d, amount: n * kasAmount, label: `Kas mingguan · ${n} siswa`, kind: 'kas' });
     });
     donations.forEach(d => tx.push({ date: d.date, amount: d.amount || 0, label: `Donasi · ${d.name || '-'}`, kind: 'donasi' }));
-    fines.filter(f => f.paid).forEach(f => tx.push({ date: f.date, amount: f.amount || 0, label: `Denda · ${memberName(f.member_id)}`, kind: 'denda' }));
     expenses.forEach(e => tx.push({ date: e.date, amount: -(e.amount || 0), label: e.description || 'Pengeluaran', kind: 'keluar' }));
     return tx.filter(t => t.date).map(t => ({ ...t, date: t.date.split('T')[0] })).sort((a, b) => a.date.localeCompare(b.date));
 }
@@ -122,39 +110,6 @@ function balanceSeries(ledger, start) {
     ledger.forEach(t => byDate[t.date] = (byDate[t.date] || 0) + t.amount);
     let bal = start;
     return [{ date: null, value: start }, ...Object.keys(byDate).sort().map(d => ({ date: d, value: bal += byDate[d] }))];
-}
-
-/* ======= Admin: sinkron denda otomatis dari tunggakan ======= */
-async function syncAutoFines() {
-    if (!API.isAdmin()) return;
-    try {
-        const [payments, members, config, fines] = await Promise.all([API.getPayments(), API.getMembers(), API.getConfig(), API.getFines()]);
-        const recap = buildRecap(payments, members, config.kas_amount || 5000);
-
-        for (const month of recap) {
-            const reason = `Denda Kas ${fmtMonth(month.ym)}`;
-            const amount = fineFor(month.ym);
-            for (const m of members) {
-                const owes = month.unpaid.some(u => u.id === m.id);
-                const existing = fines.find(f => f.member_id === m.id && (f.month === month.ym || f.reason === reason));
-                const fine = { member_id: m.id, reason, amount, date: serverDate(), paid: false, month: month.ym, auto_generated: true };
-
-                if (owes && amount > 0) {
-                    if (!existing) {
-                        await API.addFine(fine);
-                        fines.push(fine);
-                    } else if (!existing.paid && existing.amount !== amount) {
-                        await API.deleteFine(existing.id);
-                        await API.addFine(fine);
-                    }
-                } else if (!owes && existing && existing.auto_generated && !existing.paid) {
-                    await API.deleteFine(existing.id);
-                }
-            }
-        }
-    } catch (err) {
-        console.error('Gagal sinkron denda otomatis:', err);
-    }
 }
 
 /* ======= Small UI pieces ======= */
