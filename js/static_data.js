@@ -2,7 +2,7 @@ window._embeddedData = {
   "config": {
     "kas_amount": 5000,
     "previous_balance": 0,
-    "real_balance": 1353000,
+    "real_balance": 1389000,
     "class_name": "XII PPLG",
     "year": "2026/2027"
   },
@@ -338,7 +338,9 @@ window._embeddedData = {
         "2026-09-28": true,
         "2026-09-21": true,
         "2026-10-05": true,
-        "2026-10-12": true
+        "2026-10-12": true,
+        "2026-10-26": true,
+        "2026-10-19": true
       },
       "6": {
         "2026-01-05": true,
@@ -1349,6 +1351,12 @@ window._embeddedData = {
       "amount": 995000,
       "date": "2026-10-30",
       "id": 29
+    },
+    {
+      "description": "Selasa Literasi",
+      "amount": 59000,
+      "date": "2026-11-10",
+      "id": 30
     }
   ]
 };
