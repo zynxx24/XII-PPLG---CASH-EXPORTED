@@ -17,6 +17,16 @@ const API = {
     },
 
     async request(method, path, body = null) {
+        // Static export (GitHub Pages) has no server: read the bundled data directly
+        // instead of sending requests that can only 404.
+        if (window._embeddedData) {
+            if (method === 'GET') {
+                const staticData = await this.getStaticData(path);
+                if (staticData !== null) return staticData;
+            }
+            throw new Error('Mode baca saja: data tidak bisa diubah di versi statis');
+        }
+
         const opts = {
             method,
             headers: {
