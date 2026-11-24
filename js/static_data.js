@@ -2,7 +2,7 @@ window._embeddedData = {
   "config": {
     "kas_amount": 5000,
     "previous_balance": 0,
-    "real_balance": 1489000,
+    "real_balance": 1474000,
     "class_name": "XII PPLG",
     "year": "2026/2027"
   },
@@ -178,10 +178,7 @@ window._embeddedData = {
       "2026-10-05",
       "2026-10-12",
       "2026-10-19",
-      "2026-10-26",
-      "2026-11-02",
-      "2026-11-09",
-      "2026-11-16"
+      "2026-10-26"
     ],
     "records": {
       "1": {
@@ -602,10 +599,7 @@ window._embeddedData = {
         "2026-10-05": true,
         "2026-10-12": true,
         "2026-10-19": true,
-        "2026-10-26": true,
-        "2026-11-02": true,
-        "2026-11-09": true,
-        "2026-11-16": true
+        "2026-10-26": true
       },
       "15": {
         "2026-01-05": true,
